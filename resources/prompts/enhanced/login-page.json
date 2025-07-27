@@ -1,0 +1,8 @@
+{
+  "protocol": "front-end.json",
+  "component": "Login Page",
+  "technology": "React",
+  "features": "email and password with validation (valid email, password min. 8 characters)",
+  "style": "simple, layout centered on the page",
+  "output": "complete code of the component"
+}

@@ -1,0 +1,7 @@
+{
+  "component": "Clear description of what you want to achieve (e.g., login page, header, registration form)",
+  "technology": "Desired framework or language (e.g., React, Vue, HTML/CSS)",
+  "features": "Bullet list of basic functions to implement (e.g., field validation, submit, local state)",
+  "style": "Guidelines on design, layout, accessibility, compatibility, or inspirations",
+  "output": "What you want to receive exactly as a result (e.g., complete code, just component, divided structure)"
+}

@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+
+# TypeScript output
+out/
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Temporary files
+.DS_Store
+Thumbs.db
+
+# IDE configurations
+.vscode/
+
+# VSIX package
+*.vsix
+
+# Temporary test files
+temp/
+*.tmp
+
+# Test output (es. coverage)
+coverage/
+*.lcov
+
+# Generic automatic files (backup, swap, ecc.)
+*~
+*.swp
+*.bak
+*.orig
+
+# Environment files
+.env
+.env.local
+.env.*
+
+# Do not ignore static extension's files
+!media/

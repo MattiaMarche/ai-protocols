@@ -1,0 +1,40 @@
+.item {
+    background-color: var(--color-base);
+    border-radius: var(--border-radius-md);
+    position: relative;
+    padding: var(--padding-lg) var(--padding-xl);
+}
+
+.item .content {
+    color: var(--color-light);
+    display: none;
+    white-space: pre-wrap;
+    margin-top: var(--margin-base);
+    border-left: 2px solid var(--color-light-dark);
+    padding-left: 1rem;
+}
+
+.item .content > strong {
+    text-decoration: underline;
+}
+
+.item .generated {
+    border-left: 2px solid var(--color-success);
+    display: none;
+}
+
+.item .result {
+    color: var(--color-success);
+    cursor: pointer;
+    display: block;
+    font-style: italic;
+    margin-top: var(--margin-md);
+    text-decoration: underline;
+}
+
+.item .btn {
+    position: absolute;
+    margin: 0;
+    right: var(--padding-xl);
+    top: var(--padding-lg);
+}

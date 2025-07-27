@@ -1,0 +1,24 @@
+{
+    "name": "ai-protocols",
+    "version": "1.0.0",
+    "private": false,
+    "description": "A shared project to compare natural language prompts with protocol-driven ones using OpenAI, through a minimal web interface.",
+    "type": "module",
+    "main": "src/server.js",
+    "scripts": {
+        "start": "node src/server.js"
+    },
+    "keywords": ["openai", "prompt", "protocol", "ai", "human-in-the-loop"],
+    "author": "Mattia Marchesini <info@mattiamarchesini.com>",
+    "dependencies": {
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "openai": "^4.26.0"
+    },
+    "devDependencies": {},
+    "license": "MIT",
+    "engines": {
+        "node": ">=18.0.0 <=22.x.x",
+        "npm": ">=6.0.0"
+    }
+}

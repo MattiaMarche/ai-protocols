@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AI-Human Prompt Interface</title>
+        <link rel="icon" href="/favicon.png" />
+        <link rel="stylesheet" href="/normalize.css" />
+        <link rel="stylesheet" href="/globals.css" />
+        <link rel="stylesheet" href="/components/footer/footer.css" />
+        <link rel="stylesheet" href="/components/header/header.css" />
+        <link rel="stylesheet" href="/components/item/item.css" />
+        <style>
+            body .container {
+                font-family: helvetica sans-serif;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                justify-content: flex-start;
+                padding-bottom: 50px;
+            }
+
+            h1 {
+                margin: 0 0 var(--margin-xl) 0;
+            }
+
+            h2 {
+                margin-bottom: var(--margin-md);
+                margin-top: var(--margin-xl);
+            }
+
+            .column-container {
+                display: flex;
+                gap: 2rem;
+            }
+
+            .column-container > * {
+                flex: 1;
+            }
+
+            .items {
+                background-color: var(--color-base-light);
+                border-radius: var(--border-radius-md);
+                flex: 1;
+                padding: var(--padding-md);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="component" data-comp="Header" data-title="AI ↔ Human Protocol" data-subtitle="Analyze and improve AI results"></div>
+
+            <div>
+                <h2>Protocols</h2>
+                <div id="protocols" class="items"></div>
+            </div>
+
+            <div class="column-container">
+                <div>
+                    <h2>Standard Prompts</h2>
+                    <div id="standard" class="items"></div>
+                </div>
+                <div>
+                    <h2>Enhanced Prompts</h2>
+                    <div id="enhanced" class="items"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="component" data-comp="Footer"></footer>
+
+        <script>
+            async function fetchData(url) {
+                const res = await fetch(url);
+                return res.json();
+            }
+
+            async function postPrompt(type, name) {
+                const res = await fetch('/api/run-prompt', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type, name })
+                });
+                const data = await res.json();
+                if (data.success) alert('Prompt executed and result saved.');
+            }
+
+            function createItem(type, name, content, hasResult) {
+                const div = document.createElement('div');
+                div.className = 'item';
+                const title = document.createElement('strong');
+                title.textContent = name;
+                title.style.cursor = 'pointer';
+                const contentEl = document.createElement('div');
+                contentEl.className = 'content';
+                contentEl.textContent = content;
+                const resultEl = document.createElement('div');
+                resultEl.className = 'content generated';
+
+                title.onclick = () => {
+                    contentEl.style.display = contentEl.style.display === 'block' ? 'none' : 'block';
+                };
+
+                div.appendChild(title);
+                div.appendChild(document.createElement('br'));
+                div.appendChild(contentEl);
+                if (hasResult) {
+                    const resultNote = document.createElement('span');
+                    resultNote.textContent = '✔ result available';
+                    resultNote.className = 'result';
+                    resultNote.onclick = async () => {
+                        if ( resultEl.textContent === '' ) {
+                            let fileName = '';
+                            if ( name.endsWith( '.json' ) ) {
+                                fileName = name.substring( 0, name.length - 5 ) + '.md';
+                            } else {
+                                fileName = name;
+                            }
+                            const result = await fetch('/api/result?type=' + type + '&name=' + fileName);
+                            resultEl.textContent = await result.text();
+                        }
+                        if ( resultEl.style.display === 'block' ) {
+                            resultEl.style.display = 'none';
+                        } else {
+                            resultEl.style.display = 'block';
+                        }
+                    };
+                    div.appendChild(resultNote);
+                }
+                if ( type !== 'protocol' ) {
+                    const btn = document.createElement('div');
+                    btn.textContent = 'Send to OpenAI';
+                    btn.className = 'btn flat primary';
+                    btn.onclick = () => postPrompt(type, name);
+                    div.appendChild(btn);
+                }
+                div.appendChild(resultEl);
+
+                return div;
+            }
+
+            async function loadAll() {
+                const [protocols, standard, enhanced] = await Promise.all([
+                    fetchData('/api/protocols'),
+                    fetchData('/api/prompts/standard'),
+                    fetchData('/api/prompts/enhanced')
+                ]);
+
+                const protoBox = document.getElementById('protocols');
+                protocols.forEach(p => protoBox.appendChild(createItem('protocol', p.name, p.content, false)));
+
+                const stdBox = document.getElementById('standard');
+                standard.forEach(p => stdBox.appendChild(createItem('standard', p.name, p.content, p.hasResult)));
+
+                const enhBox = document.getElementById('enhanced');
+                enhanced.forEach(p => enhBox.appendChild(createItem('enhanced', p.name, p.content, p.hasResult)));
+            }
+
+            loadAll();
+        </script>
+
+        <script src="/components/index.js"></script>
+        <script src="/components/footer/footer.js"></script>
+        <script src="/components/header/header.js"></script>
+    </body>
+</html>

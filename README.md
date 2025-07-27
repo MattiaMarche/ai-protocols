@@ -44,6 +44,17 @@ This tool allows developers and researchers to:
 - Collect and store results
 - Experiment with collaborative logic between human ↔ AI
 
+## UI
+
+This project uses early versions of the KLIK theme system: a set of CSS custom properties designed to build consistent interfaces.  
+While it shares some principles with utility-first systems like Tailwind, it is much lighter and entirely tailor-made.
+
+The theme was originally part of a TypeScript + SASS module and is still in the process of being streamlined.
+
+To avoid unnecessary complexity for such a minimal UI, the project also includes a very basic component system:  
+components are plain JavaScript functions stored in the `/components` folder and injected automatically into DOM elements with a `data-comp` attribute.  
+This allows for cleaner pages without introducing libraries like React or Vue, which would be overkill in this context.
+
 ## TODO
 
 - Create a loading component that appears when a OpenAI request is processing

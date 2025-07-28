@@ -18,6 +18,7 @@ It's born with the idea to collaborate to create a new efficient way to communic
 │       └── results/        # Results of enhanced prompts
 /src
 └── public/                 # Frontend static interface
+   └── components/          # Frontend components separated to keep pages clean
 ```
 
 ## How to use
@@ -46,7 +47,7 @@ This tool allows developers and researchers to:
 
 ## UI
 
-This project uses early versions of the KLIK theme system: a set of CSS custom properties designed to build consistent interfaces.  
+This project uses partial early versions of the KLIK theme system: a set of CSS custom properties designed to build consistent interfaces.  
 While it shares some principles with utility-first systems like Tailwind, it is much lighter and entirely tailor-made.
 
 The theme was originally part of a TypeScript + SASS module and is still in the process of being streamlined.
@@ -58,7 +59,8 @@ This allows for cleaner pages without introducing libraries like React or Vue, w
 ## TODO
 
 - Create a loading component that appears when a OpenAI request is processing
-- Allora the creation of protocols and prompts directly from the web page
+- Allow the creation of protocols and prompts directly from the web page
+- Add an assistant enhancing prompts for a specified structure (ex. use `protocol.json` to convert `standard.md`)
 - Integrate more models and LLMs
 - Build and share!
 
@@ -68,6 +70,9 @@ Created by Mattia Marchesini ([info@mattiamarchesini.com](mailto:info@mattiamarc
 Currently working on **KLIK**, an AI-native meta-framework designed to empower developers without introducing unintended side effects.
 
 KLIK's vision is to create a better future with developers, by sharing this early tool with the GitHub community, I hope to encourage experimentation and collaboration around better human–AI interaction practices.
+
+Most of my work is in private or long-term projects (visit my [Index Page](https://github.com/MattiaMarche/index) if you're interested).
+I share selected tools and experiments that reflect my actual vision like `AI ↔ Human Prompt Protocol`.
 
 ---
 

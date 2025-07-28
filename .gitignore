@@ -38,7 +38,6 @@ coverage/
 # Environment files
 .env
 .env.local
-.env.*
 
 # Do not ignore static extension's files
 !media/
